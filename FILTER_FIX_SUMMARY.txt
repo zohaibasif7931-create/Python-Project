@@ -1,0 +1,42 @@
+📋 FILTERING LOGIC FIX - SUMMARY
+================================
+
+ISSUE IDENTIFIED:
+- "Oppo Neo 7" has -3 stars in satisfaction.csv (line 3)
+- But it was still showing up in recommendations
+- Root cause: The previous combo_key matching logic wasn't working properly
+
+SOLUTION IMPLEMENTED:
+Updated the filtering logic in /buy_recommendations route to:
+
+1. ✅ Read satisfaction.csv file
+2. ✅ Extract all entries with stars <= -3 (these are BLOCKED models)
+3. ✅ For each recommendation, match against blocked entries using:
+   - Model name (case-insensitive comparison)
+   - Price (exact match)
+4. ✅ Remove any matching models from recommendations before returning
+
+KEY CHANGES:
+- Changed from using combo_key set matching to row-by-row comparison
+- Added case-insensitive model name matching (so "Oppo Neo 7" matches "oppo neo 7")
+- Added detailed logging to track which models are blocked
+
+FILTERED MODELS (from your satisfaction.csv):
+┌─────────────────────────┬───────────┬───────┐
+│ Model                   │ Price     │ Stars │
+├─────────────────────────┼───────────┼───────┤
+│ Oppo Neo 7              │ ₨15,000   │ -3 ✌️  │ ← BLOCKED
+└─────────────────────────┴───────────┴───────┘
+
+VERIFICATION:
+When users select preferences and click "Get Recommendations":
+- The system will check each recommended model against blocked list
+- "Oppo Neo 7" (₨15,000) will be EXCLUDED from results
+- Console will show: "BLOCKED: Oppo Neo 7 (oppo) at ₨15000 - Stars: -3"
+
+TEST THE FIX:
+1. Go to http://127.0.0.1:5000/buy_choose
+2. Click "Use Our Recommendations"
+3. Select your preferences and click "Get Recommendations"
+4. "Oppo Neo 7" at ₨15,000 will NOT appear in results
+5. Check console output for: "BLOCKED: Oppo Neo 7..."
