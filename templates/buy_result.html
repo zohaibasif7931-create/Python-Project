@@ -1,0 +1,315 @@
+﻿﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recommended Phones</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .nav-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-container h5 {
+            color: white;
+            margin: 0;
+            font-weight: 700;
+        }
+        .home-btn-nav {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .home-btn-nav:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        .phone-card {
+            border: 2px solid #ddd;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+        .phone-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+        .phone-card p {
+            margin: 8px 0;
+            color: #555;
+            font-size: 15px;
+        }
+        .phone-card strong {
+            color: #333;
+        }
+        .phone-card form {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .satisfied {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            flex: 1;
+        }
+        .satisfied:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
+        }
+        .dissatisfied {
+            background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+            color: white;
+            flex: 1;
+        }
+        .dissatisfied:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(220, 53, 69, 0.3);
+        }
+        .no-results {
+            text-align: center;
+            color: #666;
+            padding: 30px;
+            font-size: 16px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .select-again-btn, .home-link-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .select-again-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        .select-again-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        .home-link-btn {
+            background-color: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border-color: #667eea;
+        }
+        .home-link-btn:hover {
+            background-color: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 20px;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            .phone-card {
+                padding: 15px;
+                margin-bottom: 12px;
+            }
+
+            .phone-card p {
+                font-size: 14px;
+            }
+
+            .phone-card form {
+                gap: 8px;
+            }
+
+            button {
+                padding: 8px 15px;
+                font-size: 13px;
+            }
+
+            .action-buttons {
+                gap: 10px;
+                margin-top: 20px;
+            }
+
+            .select-again-btn, .home-link-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 0.8rem;
+            }
+
+            .nav-container h5 {
+                font-size: 16px;
+            }
+
+            .home-btn-nav {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 10px;
+                padding: 15px;
+                border-radius: 10px;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+
+            .phone-card {
+                padding: 12px;
+                margin-bottom: 10px;
+            }
+
+            .phone-card p {
+                margin: 6px 0;
+                font-size: 13px;
+            }
+
+            .phone-card form {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            button {
+                padding: 8px 12px;
+                font-size: 12px;
+                flex: 1;
+            }
+
+            .no-results {
+                padding: 20px;
+                font-size: 14px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 15px;
+            }
+
+            .select-again-btn, .home-link-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar-custom">
+    <div class="nav-container">
+        <h5>PhoneTrade</h5>
+        <a href="/" class="home-btn-nav"> Home</a>
+    </div>
+</nav>
+<div class="container">
+    <h2> Recommended Phones</h2>
+    {% if models %}
+        {% for model in models %}
+    <div class="phone-card">
+        <p><strong> Brand:</strong> {{ model.brand|title }}</p>
+        <p><strong> Model:</strong> {{ model.model }}</p>
+        <p><strong>💰 Price (PTA):</strong> ₨{{ model.price_pta }}</p>
+        {% if model.stars is defined %}
+        <p><strong>⭐ Rating:</strong> {{ model.stars }}</p>
+        {% endif %}
+    </div>
+    <div class="phone-card">
+        <form action="{{ url_for('feedback') }}" method="POST">
+            <input type="hidden" name="combo_key" value="{{ model.brand }}_{{ model.model }}_{{ model.price_pta }}">
+            <input type="hidden" name="model" value="{{ model.model }}">
+            <input type="hidden" name="brand" value="{{ model.brand }}">
+            <input type="hidden" name="price_pta" value="{{ model.price_pta }}">
+            <button type="submit" name="action" value="satisfied" class="satisfied"> Satisfied</button>
+            <button type="submit" name="action" value="dissatisfied" class="dissatisfied"> Dissatisfied</button>
+        </form>
+    </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-results">No recommendations found for your criteria.</p>
+    {% endif %}
+    <div class="action-buttons">
+        <a href="{{ url_for('buy_recommendations') }}" class="select-again-btn"> Select Again</a>
+        <a href="{{ url_for('home') }}" class="home-link-btn"> Back to Home</a>
+    </div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,124 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sell Your Phone</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0; padding: 0; min-height: 100vh; }
+        .navbar-custom { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        .nav-container { max-width: 600px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-container h5 { color: white; margin: 0; font-weight: 700; }
+        .home-btn-nav { display: inline-block; padding: 10px 25px; background-color: rgba(255, 255, 255, 0.2); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; border: 2px solid rgba(255, 255, 255, 0.3); }
+        .home-btn-nav:hover { background-color: rgba(255, 255, 255, 0.4); transform: scale(1.05); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); }
+        .container { max-width: 600px; margin: 40px auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); }
+        h2 { text-align: center; margin-bottom: 30px; color: #333; font-weight: 700; font-size: 1.8rem; }
+        form label { display: block; margin-top: 20px; font-weight: 600; color: #555; margin-bottom: 12px; }
+        .rating-line { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 8px; }
+        .rating-line input[type="radio"] { display: none; }
+        .rating-line label { flex: 1; margin: 0; padding: 10px; text-align: center; background: #f0f0f0; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: 600; color: #666; transition: all 0.3s ease; }
+        .rating-line input[type="radio"]:checked + label { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-color: #667eea; transform: scale(1.1); }
+        .rating-line label:hover { background: #e8e8e8; border-color: #667eea; }
+        form select { width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: 2px solid #ddd; font-size: 15px; background: white; cursor: pointer; transition: all 0.3s ease; }
+        form select:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+        form select:hover { border-color: #667eea; }
+        .submit-btn { margin-top: 30px; padding: 14px; width: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; font-size: 16px; font-weight: 700; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3); }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4); }
+        .price-box { background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border: 2px solid #667eea; border-radius: 15px; padding: 25px; margin-top: 30px; text-align: center; box-shadow: 0 6px 15px rgba(102, 126, 234, 0.2); }
+        .price-box h4 { margin-bottom: 15px; color: #667eea; font-weight: 700; font-size: 1.3rem; }
+        .price-value { font-size: 28px; font-weight: 700; color: #1a237e; margin: 10px 0; }
+        .discount-badge { display: inline-block; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e72 100%); color: white; padding: 8px 15px; border-radius: 50px; font-weight: 600; margin-top: 10px; font-size: 14px; }
+        .back-link { text-align: center; margin-top: 30px; }
+        .back-link a { display: inline-block; padding: 10px 25px; background-color: rgba(102, 126, 234, 0.1); color: #667eea; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; border: 2px solid #667eea; }
+        .back-link a:hover { background-color: #667eea; color: white; transform: scale(1.05); }
+        @media (max-width: 768px) { .container { max-width: 100%; margin: 20px; padding: 20px; } h2 { font-size: 1.5rem; margin-bottom: 20px; } form label { font-size: 14px; margin-top: 15px; } .rating-line { gap: 5px; } .rating-line label { padding: 8px; font-size: 12px; } form select { padding: 10px; font-size: 14px; } .submit-btn { padding: 12px; font-size: 15px; } .price-value { font-size: 24px; } }
+        @media (max-width: 480px) { .container { max-width: 100%; margin: 10px; padding: 15px; } h2 { font-size: 1.2rem; margin-bottom: 15px; } form label { font-size: 13px; margin-top: 12px; } .rating-line label { padding: 7px 5px; font-size: 11px; } .submit-btn { padding: 10px; font-size: 13px; } }
+    </style>
+</head>
+<body>
+<nav class="navbar-custom">
+    <div class="nav-container">
+        <h5>PhoneTrade</h5>
+        <a href="/" class="home-btn-nav">🏠 Home</a>
+    </div>
+</nav>
+<div class="container">
+    <h2>💰 Sell Your Phone</h2>
+    <form method="POST" id="sellForm">
+        <label for="brand">📱 Brand</label>
+        <select id="brand" name="brand" required onchange="this.form.submit()">
+            <option value="" disabled {% if not selected_brand %}selected{% endif %}>Select Brand</option>
+            {% for brand in brands %}
+                <option value="{{ brand }}" {% if selected_brand == brand %}selected{% endif %}>{{ brand|capitalize }}</option>
+            {% endfor %}
+        </select>
+        {% if selected_brand %}
+        <label for="category">📂 Category</label>
+        <select id="category" name="category" required onchange="this.form.submit()">
+            <option value="" disabled {% if not selected_category %}selected{% endif %}>Select Category</option>
+            {% for cat in categories %}
+                <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat }}</option>
+            {% endfor %}
+        </select>
+        {% endif %}
+        {% if selected_category %}
+        <label for="model">📲 Model</label>
+        <select id="model" name="model" required>
+            <option value="" disabled {% if not selected_model %}selected{% endif %}>Select Model</option>
+            {% for model in models %}
+                <option value="{{ model }}" {% if selected_model == model %}selected{% endif %}>{{ model }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="brand" value="{{ selected_brand }}">
+        <input type="hidden" name="category" value="{{ selected_category }}">
+        <label for="battery">🔋 Battery Condition</label>
+        <div class="rating-line">
+            <input type="radio" id="batt_1" name="battery_rating" value="1" {% if battery_rating == '1' %}checked{% endif %}><label for="batt_1">Poor</label>
+            <input type="radio" id="batt_2" name="battery_rating" value="2" {% if battery_rating == '2' %}checked{% endif %}><label for="batt_2">Fair</label>
+            <input type="radio" id="batt_3" name="battery_rating" value="3" {% if battery_rating != '1' and battery_rating != '2' %}checked{% endif %}><label for="batt_3">Good</label>
+        </div>
+        <label for="camera">📷 Camera Condition</label>
+        <div class="rating-line">
+            <input type="radio" id="cam_1" name="camera_rating" value="1" {% if camera_rating == '1' %}checked{% endif %}><label for="cam_1">Poor</label>
+            <input type="radio" id="cam_2" name="camera_rating" value="2" {% if camera_rating == '2' %}checked{% endif %}><label for="cam_2">Fair</label>
+            <input type="radio" id="cam_3" name="camera_rating" value="3" {% if camera_rating != '1' and camera_rating != '2' %}checked{% endif %}><label for="cam_3">Good</label>
+        </div>
+        <label for="glass">✨ Back Glass Condition</label>
+        <div class="rating-line">
+            <input type="radio" id="glass_1" name="back_glass_rating" value="1" {% if back_glass_rating == '1' %}checked{% endif %}><label for="glass_1">Poor</label>
+            <input type="radio" id="glass_2" name="back_glass_rating" value="2" {% if back_glass_rating == '2' %}checked{% endif %}><label for="glass_2">Fair</label>
+            <input type="radio" id="glass_3" name="back_glass_rating" value="3" {% if back_glass_rating != '1' and back_glass_rating != '2' %}checked{% endif %}><label for="glass_3">Good</label>
+        </div>
+        <label for="display">🖥️ Display Condition</label>
+        <div class="rating-line">
+            <input type="radio" id="disp_1" name="display_rating" value="1" {% if display_rating == '1' %}checked{% endif %}><label for="disp_1">Poor</label>
+            <input type="radio" id="disp_2" name="display_rating" value="2" {% if display_rating == '2' %}checked{% endif %}><label for="disp_2">Fair</label>
+            <input type="radio" id="disp_3" name="display_rating" value="3" {% if display_rating != '1' and display_rating != '2' %}checked{% endif %}><label for="disp_3">Good</label>
+        </div>
+        <button type="submit" class="submit-btn">💵 Get Your Price</button>
+        {% endif %}
+    </form>
+    {% if price_pta is not none and price_non_pta is not none %}
+    <div class="price-box">
+        <h4>💎 Your Phone's Value</h4>
+        <p><strong>📱 Model:</strong> {{ selected_model }}</p>
+        <p style="margin-top: 10px; font-size: 13px; color: #666;">
+            <strong>Condition Ratings:</strong><br>
+            🔋 Battery: {{ {1: 'Poor', 2: 'Fair', 3: 'Good'}.get(battery_rating|int, 'Good') }} | 
+            📷 Camera: {{ {1: 'Poor', 2: 'Fair', 3: 'Good'}.get(camera_rating|int, 'Good') }} | 
+            ✨ Glass: {{ {1: 'Poor', 2: 'Fair', 3: 'Good'}.get(back_glass_rating|int, 'Good') }} | 
+            🖥️ Display: {{ {1: 'Poor', 2: 'Fair', 3: 'Good'}.get(display_rating|int, 'Good') }}
+        </p>
+        {% if discount_applied > 0 %}<div class="discount-badge">🏷️ Total Discount: {{ discount_applied }}%</div>{% endif %}
+        <p style="margin-top: 15px;"><strong>🇵🇰 Price PTA:</strong></p>
+        <div class="price-value">₨{{ price_pta }}</div>
+        <p style="margin-top: 15px;"><strong>🌍 Price Non-PTA:</strong></p>
+        <div class="price-value">₨{{ price_non_pta }}</div>
+    </div>
+    {% endif %}
+    <div class="back-link">
+        <a href="/">← Back to Home</a>
+    </div>
+</div>
+</body>
+</html>

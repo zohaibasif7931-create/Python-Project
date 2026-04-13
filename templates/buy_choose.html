@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Buy a Phone - PhoneTrade</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    /* Navigation Bar */
+    .navbar-custom {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 1rem 0;
+    }
+
+    .home-btn-nav {
+      display: inline-block;
+      padding: 10px 25px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .home-btn-nav:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .transition-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .transition-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+    }
+
+    .btn-lg {
+      padding: 0.6rem 2.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar-custom {
+        padding: 0.8rem 0;
+      }
+
+      .welcome-card {
+        padding: 2rem;
+      }
+
+      .welcome-title {
+        font-size: 2rem;
+      }
+
+      .welcome-subtitle {
+        font-size: 1rem;
+      }
+
+      .d-flex {
+        flex-direction: column;
+      }
+
+      .welcome-btn {
+        width: 100%;
+        margin: 10px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .welcome-card {
+        padding: 1.5rem;
+        margin: 20px auto;
+      }
+
+      .welcome-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      .welcome-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+      }
+
+      .welcome-btn {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        margin: 8px 0;
+      }
+
+      .card-title {
+        font-size: 1.1rem;
+      }
+
+      .card-text {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar-custom">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h5 style="color: white; margin: 0;">PhoneTrade</h5>
+    <a href="/" class="home-btn-nav">🏠 Home</a>
+  </div>
+</nav>
+
+<div class="container py-5">
+  <h2 class="mb-5 text-center fw-bold text-primary">How would you like to buy your phone?</h2>
+  <div class="row justify-content-center">
+
+    <div class="col-md-6 col-lg-5 mb-4">
+      <div class="card h-100 shadow-lg border-0 rounded-4 p-4 transition-card">
+        <div class="card-body d-flex flex-column">
+          <h4 class="card-title text-dark fw-semibold mb-3">Use Our Recommendations</h4>
+          <p class="card-text text-secondary mb-4 flex-grow-1">
+            Answer some quick questions and get phone suggestions tailored for you.
+          </p>
+          <a href="/buy_recommendations" class="btn btn-primary btn-lg rounded-pill mt-auto">Start</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-5 mb-4">
+      <div class="card h-100 shadow-lg border-0 rounded-4 p-4 transition-card">
+        <div class="card-body d-flex flex-column">
+          <h4 class="card-title text-dark fw-semibold mb-3">Use Your Preferences</h4>
+          <p class="card-text text-secondary mb-4 flex-grow-1">
+            Manually select brand, model, and phone condition to get an estimated price.
+          </p>
+          <a href="/buy/manual" class="btn btn-outline-primary btn-lg rounded-pill mt-auto">Start</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

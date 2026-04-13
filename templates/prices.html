@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+Phone Prices by Brand and Model
+{% for brand, models in data.items() %}
+{{ brand }}
+{% for model, price in models.items() %}
+{{ model }}
+₹{{ "{:,}".format(price) }}
+{% endfor %}
+{% endfor %}
+{% endblock %}

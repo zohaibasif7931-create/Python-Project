@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome to PhoneTrade</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .welcome-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .welcome-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .welcome-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #0d6efd;
+        }
+
+        .welcome-subtitle {
+            color: #6c757d;
+            font-size: 1.25rem;
+        }
+
+        .welcome-btn {
+            padding: 0.6rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .welcome-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline-secondary {
+            border-width: 2px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .welcome-card {
+                padding: 2rem;
+            }
+
+            .welcome-title {
+                font-size: 2rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1rem;
+            }
+
+            .d-flex {
+                flex-direction: column;
+            }
+
+            .welcome-btn {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .welcome-card {
+                padding: 1.5rem;
+                margin: 20px auto;
+            }
+
+            .welcome-title {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+
+            .welcome-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+            }
+
+            .welcome-btn {
+                padding: 0.5rem 1.5rem;
+                font-size: 0.9rem;
+                width: 100%;
+                margin: 8px 0;
+            }
+
+            .gap-4 {
+                gap: 0.8rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+
+    <!-- Welcome Section -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-10 col-lg-8 text-center">
+            <div class="welcome-card">
+                <h1 class="welcome-title mb-4">Welcome to <br><span class="text-dark">Automated PhoneTrade</span></h1>
+                <p class="welcome-subtitle mb-5">Do you want to buy or sell a phone?</p>
+                <div class="d-flex justify-content-center gap-4 flex-wrap">
+                    <a href="{{ url_for('buy_choose') }}" class="btn btn-primary btn-lg welcome-btn">Buy</a>
+                    <a href="{{ url_for('sell') }}" class="btn btn-outline-secondary btn-lg welcome-btn">Sell</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html

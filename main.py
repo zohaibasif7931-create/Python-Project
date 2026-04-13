@@ -32,6 +32,7 @@ FEATURE_COLS = [
 FEEDBACK_FILE = 'feedback.csv'
 STAR_TRACKER_FILE = 'model_stars.csv'  # For tracking model star ratings
 SATISFACTION_CSV = os.path.join(BASE_DIR, "satisfaction.csv")
+satisfaction_file = SATISFACTION_CSV
 
 
 # === Database connection ===
@@ -254,8 +255,8 @@ def buy_recommendations():
                 print(f"❌ Error filtering satisfaction data: {e}")
                 recommendations = all_recommendations[:3]
 
-            os.makedirs('db', exist_ok=True)
-            with open(os.path.join('db', 'feedback.csv'), 'a', newline='') as f:
+            os.makedirs(os.path.dirname(FEEDBACK_CSV), exist_ok=True) if os.path.dirname(FEEDBACK_CSV) else None
+            with open(FEEDBACK_CSV, 'a', newline='') as f:
                 csv.writer(f).writerow([user_input[c] for c in FEATURE_COLS])
 
             return render_template('buy_result.html', models=recommendations)
@@ -285,11 +286,6 @@ def load_csv_dataframe(path, columns):
 ensure_csv_file(RECOMMENDATIONS_CSV, CSV_COLUMNS + ['stars'])
 ensure_csv_file(FEEDBACK_CSV, CSV_COLUMNS)
 
-@app.route('/')
-def ne_home():
-    # On first load, show empty or welcome page
-    return render_template('buy_recommendations.html', models=[])
-
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
@@ -308,7 +304,8 @@ def recommend():
 @app.route('/load_recommendations')
 def load_reco():
     form_data = request.args.to_dict()
-    return recommend()
+    models = get_recommendations(form_data)
+    return render_template('buy_recommendations.html', models=models)
 
 
 @app.route('/feedback', methods=['POST'])
@@ -344,18 +341,17 @@ def feedback():
 
 
 def get_recommendations(form_data):
-    df = pd.read_csv("your_models.csv")
-    satisfaction_df = pd.read_csv("satisfaction.csv")
-
-    # Merge satisfaction stars into model data
-    df = df.merge(satisfaction_df, on="combo_key", how="left")
-    df["stars"] = df["stars"].fillna(0)
-
-    # Block models with too low stars
-    df = df[df["stars"] > -2]
-
-    # ... your filtering logic here ...
-    return df.to_dict(orient="records")
+    try:
+        model, df = joblib.load(MODEL_PATH)
+        user_input = {col: int(form_data.get(col, 0)) for col in FEATURE_COLS}
+        user_df = pd.DataFrame([user_input])
+        distances, indices = model.kneighbors(user_df[FEATURE_COLS].values, n_neighbors=10)
+        recs = df.iloc[indices[0]][['brand', 'model', 'price_pta']].copy()
+        recs['combo_key'] = recs['brand'].str.lower() + '_' + recs['model'] + '_' + recs['price_pta'].astype(str)
+        return recs.to_dict(orient="records")
+    except Exception as e:
+        print(f"get_recommendations error: {e}")
+        return []
 
 
 
