@@ -8,7 +8,7 @@ from flask import Flask, render_template, g, request, redirect, url_for
 from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import StandardScaler
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='.')
 
 # === Settings ===
 import os
@@ -285,32 +285,6 @@ def load_csv_dataframe(path, columns):
 ensure_csv_file(RECOMMENDATIONS_CSV, CSV_COLUMNS + ['stars'])
 ensure_csv_file(FEEDBACK_CSV, CSV_COLUMNS)
 
-@app.route('/')
-def ne_home():
-    # On first load, show empty or welcome page
-    return render_template('buy_recommendations.html', models=[])
-
-
-@app.route('/recommend', methods=['POST'])
-def recommend():
-    form_data = request.form.to_dict()
-    models = get_recommendations(form_data)
-
-    # Filter blocked models based on satisfaction.csv
-    if os.path.exists(satisfaction_file):
-        satisfaction_df = pd.read_csv(satisfaction_file)
-        blocked_keys = set(satisfaction_df[satisfaction_df['stars'] <= -2]['combo_key'])
-        models = [model for model in models if model.get('combo_key') not in blocked_keys]
-
-    return render_template('buy_recommendations.html', models=models)
-
-
-@app.route('/load_recommendations')
-def load_reco():
-    form_data = request.args.to_dict()
-    return recommend()
-
-
 @app.route('/feedback', methods=['POST'])
 def feedback():
     action = request.form.get("action")
@@ -340,22 +314,6 @@ def feedback():
     satisfaction_df.to_csv(SATISFACTION_CSV, index=False)
 
     return render_template("thankyou.html")
-
-
-
-def get_recommendations(form_data):
-    df = pd.read_csv("your_models.csv")
-    satisfaction_df = pd.read_csv("satisfaction.csv")
-
-    # Merge satisfaction stars into model data
-    df = df.merge(satisfaction_df, on="combo_key", how="left")
-    df["stars"] = df["stars"].fillna(0)
-
-    # Block models with too low stars
-    df = df[df["stars"] > -2]
-
-    # ... your filtering logic here ...
-    return df.to_dict(orient="records")
 
 
 
