@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find Your Perfect Phone</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0; padding: 0; min-height: 100vh; }
+        .navbar-custom { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        .nav-container { max-width: 600px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-container h5 { color: white; margin: 0; font-weight: 700; }
+        .home-btn-nav { display: inline-block; padding: 10px 25px; background-color: rgba(255, 255, 255, 0.2); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; border: 2px solid rgba(255, 255, 255, 0.3); }
+        .home-btn-nav:hover { background-color: rgba(255, 255, 255, 0.4); transform: scale(1.05); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); }
+        .container { max-width: 600px; margin: 40px auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); }
+        h2 { text-align: center; margin-bottom: 30px; color: #333; font-weight: 700; font-size: 1.8rem; }
+        form label { display: block; margin-top: 20px; font-weight: 600; color: #555; margin-bottom: 12px; }
+        .star-rating-line { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 8px; }
+        .star-rating-line input[type="radio"] { display: none; }
+        .star-rating-line label { flex: 1; margin: 0; padding: 10px; text-align: center; background: #f0f0f0; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: 600; color: #666; transition: all 0.3s ease; }
+        .star-rating-line input[type="radio"]:checked + label { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-color: #667eea; transform: scale(1.1); }
+        .star-rating-line label:hover { background: #e8e8e8; border-color: #667eea; }
+        form select { width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: 2px solid #ddd; font-size: 15px; background: white; cursor: pointer; transition: all 0.3s ease; }
+        form select:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+        form select:hover { border-color: #667eea; }
+        button { margin-top: 30px; padding: 14px; width: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; font-size: 16px; font-weight: 700; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3); }
+        button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4); }
+        @media (max-width: 768px) { .container { max-width: 100%; margin: 20px; padding: 20px; } h2 { font-size: 1.5rem; margin-bottom: 20px; } form label { font-size: 14px; margin-top: 15px; } .star-rating-line { gap: 5px; } .star-rating-line label { padding: 8px; font-size: 12px; } form select { padding: 10px; font-size: 14px; } button { padding: 12px; font-size: 15px; } }
+        @media (max-width: 480px) { .container { max-width: 100%; margin: 10px; padding: 15px; } h2 { font-size: 1.2rem; margin-bottom: 15px; } form label { font-size: 13px; margin-top: 12px; } .star-rating-line label { padding: 7px 5px; font-size: 11px; } button { padding: 10px; font-size: 13px; } }
+    </style>
+</head>
+<body>
+<nav class="navbar-custom">
+    <div class="nav-container">
+        <h5>PhoneTrade</h5>
+        <a href="/" class="home-btn-nav">Home</a>
+    </div>
+</nav>
+<div class="container">
+    <h2>Find Your Perfect Phone</h2>
+    {% if error %}
+    <div style="background: #ffebee; border: 2px solid #d32f2f; color: #d32f2f; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-weight: 600;">
+        Error: {{ error }}
+    </div>
+    {% endif %}
+    <form method="post" id="preferencesForm">
+        <label style="font-size: 18px; font-weight: 700; color: #1a237e; margin-bottom: 15px;">Price Range (Rs) - PRIORITY:</label>
+        <select name="price_pta" required style="font-size: 16px; padding: 15px; border: 3px solid #667eea;">
+            {% for amount in range(15000, 405000, 5000) %}
+                <option value="{{ amount }}" style="padding: 10px;">Rs{{ amount }}</option>
+            {% endfor %}
+        </select>
+        <hr style="margin: 30px 0; border: none; border-top: 2px solid #ddd;">
+        <label>Camera:</label>
+        <div class="star-rating-line">
+            <input type="radio" id="camera_1" name="camera" value="1"><label for="camera_1">1</label>
+            <input type="radio" id="camera_2" name="camera" value="2"><label for="camera_2">2</label>
+            <input type="radio" id="camera_3" name="camera" value="3" checked><label for="camera_3">3</label>
+            <input type="radio" id="camera_4" name="camera" value="4"><label for="camera_4">4</label>
+            <input type="radio" id="camera_5" name="camera" value="5"><label for="camera_5">5</label>
+        </div>
+        <label>Battery:</label>
+        <div class="star-rating-line">
+            <input type="radio" id="battery_1" name="battery" value="1"><label for="battery_1">1</label>
+            <input type="radio" id="battery_2" name="battery" value="2"><label for="battery_2">2</label>
+            <input type="radio" id="battery_3" name="battery" value="3" checked><label for="battery_3">3</label>
+            <input type="radio" id="battery_4" name="battery" value="4"><label for="battery_4">4</label>
+            <input type="radio" id="battery_5" name="battery" value="5"><label for="battery_5">5</label>
+        </div>
+        <label>Screen:</label>
+        <div class="star-rating-line">
+            <input type="radio" id="screen_1" name="screen" value="1"><label for="screen_1">1</label>
+            <input type="radio" id="screen_2" name="screen" value="2"><label for="screen_2">2</label>
+            <input type="radio" id="screen_3" name="screen" value="3" checked><label for="screen_3">3</label>
+            <input type="radio" id="screen_4" name="screen" value="4"><label for="screen_4">4</label>
+            <input type="radio" id="screen_5" name="screen" value="5"><label for="screen_5">5</label>
+        </div>
+        <label>Processor:</label>
+        <div class="star-rating-line">
+            <input type="radio" id="processor_1" name="processor" value="1"><label for="processor_1">1</label>
+            <input type="radio" id="processor_2" name="processor" value="2"><label for="processor_2">2</label>
+            <input type="radio" id="processor_3" name="processor" value="3" checked><label for="processor_3">3</label>
+            <input type="radio" id="processor_4" name="processor" value="4"><label for="processor_4">4</label>
+            <input type="radio" id="processor_5" name="processor" value="5"><label for="processor_5">5</label>
+        </div>
+        <label>RAM:</label>
+        <div class="star-rating-line">
+            <input type="radio" id="ram_1" name="ram" value="1"><label for="ram_1">1</label>
+            <input type="radio" id="ram_2" name="ram" value="2"><label for="ram_2">2</label>
+            <input type="radio" id="ram_3" name="ram" value="3" checked><label for="ram_3">3</label>
+            <input type="radio" id="ram_4" name="ram" value="4"><label for="ram_4">4</label>
+            <input type="radio" id="ram_5" name="ram" value="5"><label for="ram_5">5</label>
+        </div>
+        <label>Storage:</label>
+        <div class="star-rating-line">
+            <input type="radio" id="storage_1" name="storage" value="1"><label for="storage_1">1</label>
+            <input type="radio" id="storage_2" name="storage" value="2"><label for="storage_2">2</label>
+            <input type="radio" id="storage_3" name="storage" value="3" checked><label for="storage_3">3</label>
+            <input type="radio" id="storage_4" name="storage" value="4"><label for="storage_4">4</label>
+            <input type="radio" id="storage_5" name="storage" value="5"><label for="storage_5">5</label>
+        </div>
+        <label>Build Quality:</label>
+        <div class="star-rating-line">
+            <input type="radio" id="build_1" name="build_quality" value="1"><label for="build_1">1</label>
+            <input type="radio" id="build_2" name="build_quality" value="2"><label for="build_2">2</label>
+            <input type="radio" id="build_3" name="build_quality" value="3" checked><label for="build_3">3</label>
+            <input type="radio" id="build_4" name="build_quality" value="4"><label for="build_4">4</label>
+            <input type="radio" id="build_5" name="build_quality" value="5"><label for="build_5">5</label>
+        </div>
+        <button type="submit">Get Recommendations</button>
+    </form>
+</div>
+</body>
+</html>
